@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortune Cookie</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            position: relative;
+            display: inline-block;
+            padding: 0px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            line-height: 0;
+        }
+        .content-wrapper {
+            position: relative;
+            display: block;
+            line-height: 0;
+        }
+        .background-image {
+            display: block;
+            max-width: 700px;
+            max-height: 500px;
+            width: auto;
+            height: auto;
+            position: relative;
+            z-index: 1;
+        }
+        .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-style: italic;
+            color: #333;
+            text-align: center;
+            padding: 30px 40px;
+            max-width: 70%;
+            line-height: 1.7;
+            font-weight: 400;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8), -1px -1px 2px rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content-wrapper">
+            <img src="holiday-image.png" alt="Holiday Background" class="background-image" id="backgroundImage">
+            <div class="text" id="text"></div>
+        </div>
+    </div>
+
+    <script>
+        // Hardcoded array of texts
+        const texts = [
+"You’ll find a calmer rhythm that helps you feel more grounded.",
+"You’ll pick up a new skill this year that feels surprisingly natural to you.",
+"Small steps will lead to steady progress.",
+"New opportunities will appear when you least expect them.",
+"You’ll learn to focus on what truly matters.",
+"You’ll notice progress in places that once felt stuck.",
+"You’ll learn to support yourself the same way you support others.",
+"You’ll find yourself handling challenges with more ease.",
+"You’ll discover new ways to stay organized and steady.",
+"Your confidence will grow through small, meaningful wins.",
+"Deep conversations will bring insights that help you move forward.",
+"AI tools will blend naturally into your workflow.",
+"New ideas will come when you give yourself space.",
+"You’ll feel proud of the calm progress you make.",
+"A clearer path will begin to unfold in front of you.",
+"You’ll discover strength in showing up consistently.",
+"AI will help lighten the load when tasks get overwhelming.",
+"You’ll take small but meaningful steps that show you’re finally putting yourself on your own priority list.",
+"You’ll reconnect with goals that matter to you.",
+"Your patience will help guide you through the year.",
+"You’ll feel more at peace with what you can’t control.",
+"You’ll feel more confident choosing what to focus on.",
+"You’ll find it easier to let go of unnecessary pressure.",
+"A slower pace will sometimes give you better outcomes.",
+"You’ll become more aware of what gives you energy.",
+"You’ll find steady motivation in doing things step by step.",
+"You’ll learn something new that changes how you see things.",
+"This year will help you feel more grounded in who you are.",
+"You’ll begin to trust yourself more deeply.",
+"You’ll notice more moments of genuine ease.",
+"You’ll make choices that support balance rather than stress.",
+"You’ll feel encouraged by how far you’ve come.",
+"AI tools will help you stay organized with less effort.",
+"You’ll grow more confident trying new approaches.",
+"You’ll feel more comfortable taking your time.",
+"This year will remind you of your natural strengths.",
+"You’ll experience calm where you once felt pressure.",
+"You’ll discover new routines that feel right for you.",
+"You’ll feel supported by the progress you’re making.",
+"You’ll find clarity in moments of quiet.",
+"You’ll have moments this year where you feel truly rested, not just less tired.",
+"You’ll make decisions with more confidence and ease.",
+"AI suggestions will give you helpful shortcuts.",
+"You’ll feel more capable than you did last year.",
+"AI will help you stay on top of your workload.",
+"An opportunity you didn’t expect will turn out to be exactly what you needed.",
+"You’ll handle uncertainty with surprising calm.",
+"You’ll find steady improvement in things you practice.",
+"You’ll trust your inner voice a little more.",
+"You’ll get better at choosing what truly matters.",
+"You’ll settle into routines that bring comfort.",
+"You’ll feel more confident speaking up when needed.",
+"You’ll learn how capable you truly are.",
+"AI tools will help you focus on more meaningful work.",
+"You’ll find joy in simple, everyday moments.",
+"You’ll feel encouraged by the direction you’re moving in.",
+"You’ll discover new ways to simplify your day.",
+"You’ll grow more patient with yourself.",
+"You’ll see progress even when it comes quietly.",
+"A new opportunity will help you grow in a direction that feels right.",
+"You’ll learn to balance effort with rest.",
+"You’ll feel proud of how much you can handle.",
+"You’ll feel prepared when a new opportunity appears.",
+"You’ll notice your confidence growing throughout the year.",
+"You’ll begin to understand exactly what supports your well-being.",
+"You’ll learn to let things unfold without rushing.",
+"A new opportunity will give you a refreshing sense of direction.",
+"An opportunity will come at the exact moment you feel ready for something different.",
+"AI tools will help you save time when you need it most.",
+"You’ll discover better ways to organize your thoughts.",
+"You’ll recognize the value of a slower pace.",
+"You’ll find comfort in predictable routines.",
+"You’ll feel more confident stepping into new situations.",
+"Your clarity will grow through small realizations.",
+"You’ll gain confidence by seeing real improvement.",
+"You’ll feel motivated by the progress you make.",
+"You’ll understand your needs more clearly.",
+"AI will help you discover easier ways to complete tasks.",
+"You’ll choose balance more often than stress.",
+"AI will help guide you during busy seasons.",
+"You’ll find comfort in routines that feel familiar and steady.",
+"You’ll see improvements in areas you’ve worked on for a long time.",
+"You’ll feel more prepared for whatever comes your way.",
+"You’ll make choices that align with your long-term goals.",
+"You’ll learn from experiences more easily.",
+"You’ll appreciate how far small efforts can take you.",
+"You’ll recognize your own resilience more clearly.",
+"You’ll find value in slowing down and taking breaks.",
+"AI will help clear up confusion in your daily tasks.",
+"You’ll make space for things that help you grow.",
+"You’ll notice new strengths showing up.",
+"You’ll feel more balanced in your daily routine.",
+"AI support will help you stay organized without stress.",
+"You’ll find inspiration in simple, everyday details.",
+"You’ll let go of habits that no longer help you.",
+"You’ll feel more settled in your direction.",
+"You’ll recognize what kind of pace works best for you.",
+"You’ll feel more supported by your own routines.",
+"You’ll understand what helps you focus best.",
+"You’ll enjoy new clarity around your priorities.",
+"You’ll uncover new ways to simplify your responsibilities.",
+"You’ll appreciate how your patience pays off.",
+"You’ll settle into a healthier, calmer workflow.",
+"You’ll make progress you didn’t realize you were ready for.",
+"You’ll feel more open to new ideas.",
+"You’ll see growth in areas where you’ve shown consistency.",
+"You’ll feel motivated by clear, simple goals.",
+"You’ll get better at balancing responsibilities.",
+"You’ll start noticing the calm in your everyday life.",
+"You’ll feel capable in situations that used to intimidate you.",
+"You’ll see your progress more clearly as the year goes on.",
+"You’ll notice how much easier things become when you go step by step.",
+"You’ll feel more hopeful about where you're headed.",
+"You’ll handle surprises with more calm and confidence.",
+"You’ll keep growing in ways you didn’t expect.",
+"You’ll get better at choosing what aligns with your values.",
+"You’ll see that you’re capable of more than you thought.",
+"You’ll find lessons in simple experiences.",
+"You’ll feel a quiet confidence when the right opportunity comes along.",
+"You’ll feel encouraged by the stability you build.",
+"You'll become better at balancing structure and flexibility.",
+"You’ll find more patience with yourself.",
+"AI will help bring new insight to old routines.",
+"You’ll grow more confident in new responsibilities.",
+"You'll begin to recognize your real strengths.",
+"You'll feel proud of how far you've come.",
+"You’ll appreciate the balance you’re creating.",
+"You’ll notice progress building month after month.",
+"You’ll make choices that help you stay steady.",
+"You'll see opportunities you hadn't noticed before.",
+"You’ll feel more confident heading into new chapters.",
+"You’ll understand your strengths in a deeper way.",
+"AI will help spark ideas that move things forward.",
+"You’ll feel more relaxed navigating change.",
+"AI will make some tasks noticeably easier.",
+"You’ll discover routines that naturally support your well-being.",
+"You’ll trust your choices more as the year goes on.",
+"You’ll feel empowered to move toward what you want.",
+"You’ll see how far consistency really takes you.",
+"You’ll learn to walk away from things that don’t deserve your energy.",
+"And this year, you'll finally get the promotion you’ve been working toward — the recognition you truly deserve.",
+"You’ll feel seen and appreciated in moments that matter.",
+"You’ll notice encouragement coming from unexpected places.",
+"You’ll feel supported in ways that remind you you’re not alone.",
+"You’ll discover small moments that lift your spirits.",
+"You’ll find comfort in knowing you’re moving in the right direction.",
+"You’ll feel more connected to what brings you calm and balance.",
+"You’ll hear words of appreciation at exactly the right time.",
+"You’ll notice positive changes in how you care for yourself.",
+"You’ll gain confidence as your progress becomes more visible.",
+"You’ll be recognized for the reliability and kindness you bring.",
+"You’ll realize how valuable your presence is to others.",
+"You’ll notice that something which used to drain you suddenly feels easier.",
+"You’ll feel uplifted by the support of people who believe in you.",
+"You’ll discover how much strength gentle consistency can bring.",
+"You’ll feel proud of the way you show up for yourself and others.",
+"You’ll receive encouragement at exactly the moment you need it most.",
+"You’ll feel proud of yourself more often this year.",
+"A small win will brighten your day in a way you didn’t expect.",
+"You’ll find calm even in the middle of busy moments.",
+"You’ll discover that a challenge you worried about is easier than you imagined.",
+"A new idea will spark excitement and fresh energy.",
+"You’ll feel appreciated for the steady effort you bring every day.",
+"You’ll notice how much progress you’ve made without even realizing it.",
+"A kind message or gesture will stay with you longer than you expect.",
+"You’ll feel lighter as you let go of things that no longer weigh you down.",
+"You’ll discover something beautiful in your daily routine.",
+"You’ll receive recognition that reminds you your work matters.",
+"You’ll see your confidence grow in the spaces where you once hesitated.",
+"A door will open that helps you move toward something meaningful.",
+"You’ll find moments of joy that feel effortless and real.",
+"You’ll receive encouragement that feels sincere and perfectly timed.",
+"You’ll recognize your own resilience with new appreciation.",
+"Someone’s gratitude will touch you more deeply than you expect.",
+"You’ll rediscover a part of yourself you’ve missed and welcome it back.",
+"A simple moment will remind you how much beauty is still around you.",
+"You’ll gain clarity that helps you move forward without hesitation.",
+"You’ll feel steady in the places that used to feel uncertain.",
+"You’ll be reminded that your presence truly makes a difference.",
+"You’ll let go of one worry that has taken too much space.",
+"You’ll reconnect with something you used to enjoy and feel glad you did.",
+"You’ll find a healthier balance between what you give and what you keep for yourself.",
+"You’ll feel more in control of your time and energy.",
+"You’ll find comfort in knowing you’re not expected to have everything figured out.",
+"You’ll start giving yourself credit for things you usually overlook.",
+"You’ll feel more confident setting limits that protect your well-being.",
+"You’ll make progress on something that’s been quietly waiting for attention.",
+"You’ll surprise yourself with how calmly you handle a stressful moment.",
+"You’ll rediscover a routine that genuinely helps you feel better.",
+"You’ll receive a piece of advice that lands at exactly the right time.",
+"You’ll find a small change that makes your days noticeably easier.",
+"You’ll see proof that the steady work you’ve been doing is paying off.",
+"You’ll be trusted with responsibilities that show others believe in your potential.",
+"You’ll make progress in your career in a way that feels earned, steady, and genuinely deserved.",
+"You’ll feel a growing sense of readiness for the role you’ve been working toward.",
+"You’ll feel a moment this year when it becomes clear — you’ve truly grown into the role you’ve been aiming for.",
+"This year will bring the promotion you deserve, opening the door to the next chapter of your growth.",
+"A new opportunity will help you see your own potential more clearly.",
+"You’ll feel encouraged when an opportunity arrives at just the right moment.",
+"You’ll discover an opportunity that helps you use your strengths in a new way.",
+        ];
+
+        // Get the user's text from localStorage
+        let userText = localStorage.getItem('randomText');
+
+        // If no text is stored, select a random one and save it
+        if (!userText) {
+            const randomIndex = Math.floor(Math.random() * texts.length);
+            userText = texts[randomIndex];
+            localStorage.setItem('randomText', userText);
+        }
+
+        // Display the text on the page
+        document.getElementById('text').textContent = userText;
+
+        // Handle image loading errors
+        const backgroundImage = document.getElementById('backgroundImage');
+        backgroundImage.addEventListener('error', function() {
+            console.warn('Image not found: holiday-image.png. Please add the image file to the project directory.');
+            this.style.display = 'none';
+            document.body.style.backgroundColor = '#f0f0f0';
+        });
+    </script>
+</body>
+</html>
