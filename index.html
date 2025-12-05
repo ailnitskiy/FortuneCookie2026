@@ -327,13 +327,13 @@
         ];
 
         // Get the user's text from localStorage
-        let userText = localStorage.getItem('randomText');
+        let userText = localStorage.getItem('newRandomText');
 
         // If no text is stored, select a random one and save it
         if (!userText) {
             const randomIndex = Math.floor(Math.random() * texts.length);
             userText = texts[randomIndex];
-            localStorage.setItem('randomText', userText);
+            localStorage.setItem('newRandomText', userText);
         }
 
         // Display the text on the page
